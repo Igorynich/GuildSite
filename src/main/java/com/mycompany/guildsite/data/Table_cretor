@@ -1,0 +1,11 @@
+create table ZAYAVKI (
+   id     INT      NOT NULL auto_increment,
+   name   VARCHAR(20) default NULL,
+   class  VARCHAR(20) default NULL,
+   spec   VARCHAR(20)  default NULL,
+   why    VARCHAR(200)  default NULL,
+   what   VARCHAR(200)  default NULL,
+   add1   VARCHAR(200)  default NULL,
+   add2   VARCHAR(200)  default NULL,
+   PRIMARY KEY (id)
+);
