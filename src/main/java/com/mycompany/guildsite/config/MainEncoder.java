@@ -8,5 +8,6 @@ public class MainEncoder {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println("phoenix - "+ encoder.encode("phoenix"));
         System.out.println("blabla - "+ encoder.encode("blabla"));
+        System.out.println("222 - "+ encoder.encode("222"));
     }
 }

@@ -2,18 +2,7 @@ package com.mycompany.guildsite.data;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -31,7 +20,8 @@ public class Zayavka implements Serializable {
 
     @Id
     @SequenceGenerator(name = "zayasequence", sequenceName = "zayasequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "zayasequence")
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "zayasequence")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "zayasequence")
     @Column(name = "id")
     private long id;
 
@@ -69,8 +59,9 @@ public class Zayavka implements Serializable {
     @Column(name = "exp")
     private String exp;
 
-    @Column(name = "add2")
-    private String add2;
+    @OneToOne
+    @JoinColumn(name = "gstatic", referencedColumnName = "staticname")
+    private GuildStatic gstatic;
 
     public Zayavka() {
     }
@@ -85,7 +76,7 @@ public class Zayavka implements Serializable {
         this.exp = exp;
     }
 
-    public Zayavka(Long aLong, String name, WowClasses cl, String why, String what, String ilvl, Date date, boolean read, String exp, String add2) {
+    public Zayavka(Long aLong, String name, WowClasses cl, String why, String what, String ilvl, Date date, boolean read, String exp, GuildStatic gstatic) {
         this.id = id;
         this.name = name;
         this.wowClass = cl;
@@ -93,7 +84,7 @@ public class Zayavka implements Serializable {
         this.why = why;
         this.what = what;
         this.exp = exp;
-        this.add2 = add2;
+        this.gstatic = gstatic;
     }
 
     
@@ -169,12 +160,12 @@ public class Zayavka implements Serializable {
         this.exp = exp;
     }
 
-    public String getAdd2() {
-        return add2;
+    public GuildStatic getGstatic() {
+        return gstatic;
     }
 
-    public void setAdd2(String add2) {
-        this.add2 = add2;
+    public void setGstatic(GuildStatic gstatic) {
+        this.gstatic = gstatic;
     }
 
     public String getWhy() {

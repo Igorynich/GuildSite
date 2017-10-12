@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 /**
  * Created by User on 16.08.2017.
  */
-@Component
+@Component(value = "wcvalidator")
 public class WowClassesValidator implements Validator {
     public WowClassesValidator() {
     }

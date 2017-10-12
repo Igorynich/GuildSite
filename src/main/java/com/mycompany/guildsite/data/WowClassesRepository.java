@@ -16,7 +16,9 @@ public interface WowClassesRepository {
     public boolean createTable();
     public List<String> findAllClasses();
     public List<WowClasses> findAllSpecs();
+    public List<WowClasses> findAllSpecsByLocale(String locale);
     public List<String> findAllSpecByClass(String wowClass);
     public List<WowClasses> findAllClassesAsObjects();
     public List<WowClasses> findAllByShortname(String shortname);
+    public List<WowClasses> findAllClassesByLocale(String locale);
 }

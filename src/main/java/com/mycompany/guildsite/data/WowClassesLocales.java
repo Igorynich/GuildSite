@@ -16,8 +16,14 @@ public class WowClassesLocales implements Serializable {
     @Column(name = "id")
     private long id;
 
+
+    /*@Column(name = "wowclass_shortname")
+    private String wowClassShortName;*/
+
+//    @ManyToOne
+//    @JoinColumn(name="wowclass_shortname", referencedColumnName = "shortname")
     @Column(name = "wowclass_shortname")
-    private String wowClassShortName;
+    private String wowClass;
 
     @Column(name = "locale")
     private String locale;
@@ -31,8 +37,8 @@ public class WowClassesLocales implements Serializable {
     public WowClassesLocales() {
     }
 
-    public WowClassesLocales(String wowClassShortName, String locale, String wowClassLocalized, String wowSpecLocalized) {
-        this.wowClassShortName = wowClassShortName;
+    public WowClassesLocales(String wowClass, String locale, String wowClassLocalized, String wowSpecLocalized) {
+        this.wowClass = wowClass;
         this.locale = locale;
         this.wowClassLocalized = wowClassLocalized;
         this.wowSpecLocalized = wowSpecLocalized;
@@ -46,12 +52,12 @@ public class WowClassesLocales implements Serializable {
         this.id = id;
     }
 
-    public String getWowClassShortName() {
-        return wowClassShortName;
+    public String getWowClass() {
+        return wowClass;
     }
 
-    public void setWowClassShortName(String wowClassShortName) {
-        this.wowClassShortName = wowClassShortName;
+    public void setWowClass(String wowClass) {
+        this.wowClass = wowClass;
     }
 
     public String getLocale() {

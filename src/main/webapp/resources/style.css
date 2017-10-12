@@ -1,0 +1,166 @@
+div.container-fluid{
+    min-height: 75%;
+}
+
+div.mainform {
+    /*position: relative;*/
+    border: 3px solid #32AA21;
+    width: 500px;
+    padding: 20px;
+
+}
+
+div.right-side {
+    position: absolute;
+    border-style: solid;
+    border-radius: 5px; /*round border*/
+    padding: 10px;
+    width: 50px;
+
+    top: 0px;
+    right: -85px;
+    /*margin: 0 0 10px 10px;*/
+}
+
+div.errors {
+    color: red;
+}
+
+label.errors {
+    color: red;
+}
+
+input.errors {
+    background-color: darksalmon;
+}
+
+select.errors {
+    background-color: darksalmon;
+}
+
+div.green {
+    color: #32AA21;
+}
+
+img.bla {
+
+    max-height: 300%;
+    width: auto;
+
+
+
+}
+
+
+
+TD, TH {
+
+    text-align: center; /* Выравнивание по центру */
+
+}
+
+td.classspec, th.classspec{
+    width: 40%;
+
+}
+
+td.exp, th.exp{
+    width: 20%;
+
+}
+
+
+
+.sortorder:after {
+    content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sortorder.reverse:after {
+    content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}
+span.ng-hide:not(.ng-hide-animate) {
+    /* These are just alternative ways of hiding an element */
+    display: block!important;
+    visibility: hidden;
+}
+p{
+    text-align: left;
+}
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+/*label {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 10px;
+    line-height: 36px;
+    cursor: pointer;
+}*/
+
+/*label::before {
+    content: " ";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #8e44ad;
+    border-radius: 4px;
+    z-index: -1;
+}*/
+input[type="radio"] + label {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 10px;
+    line-height: 36px;
+    cursor: pointer;
+}
+input[type="radio"] + label::before {
+    content: " ";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ad4837;
+    z-index: -1;
+    border-radius: 18px;
+    cursor: pointer;
+}
+/* Checked */
+
+input[type="radio"]:checked + label {
+    padding-left: 10px;
+    color: #fff;
+}
+
+input[type="radio"]:checked + label::before {
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #AD4837;
+}
+/* Transition */
+label,
+label::before {
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}
+
+tr.hand{
+    /*color: darkblue;*/
+
+    cursor: pointer;
+}

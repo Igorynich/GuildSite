@@ -7,11 +7,13 @@ package com.mycompany.guildsite.config;
 
 import javax.servlet.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -40,6 +42,7 @@ public class GuildSiteInitializer extends AbstractAnnotationConfigDispatcherServ
 
 
     }*/
+
 
     @Override
     protected Class<?>[] getRootConfigClasses() {

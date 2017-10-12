@@ -5,10 +5,14 @@
  */
 package com.mycompany.guildsite.data.repositories;
 
+import com.mycompany.guildsite.controller.HomeController;
 import com.mycompany.guildsite.data.WowClasses;
+import com.mycompany.guildsite.data.WowClassesLocales;
 import com.mycompany.guildsite.data.WowClassesRepository;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,6 +26,7 @@ public class HibernateWowClassesRepository implements WowClassesRepository {
 
     private SessionFactory sessionFactory;
     private int i = 0;
+    private static final Logger logger = Logger.getLogger(HibernateWowClassesRepository.class);
 
     @Autowired
     public HibernateWowClassesRepository(SessionFactory sessionFactory) {
@@ -89,8 +94,18 @@ public class HibernateWowClassesRepository implements WowClassesRepository {
     @Override
     public List<WowClasses> findAllSpecs() {
         Session session = currentSession();
-        String hql = "Select wc FROM WowClasses wc";
+        String hql = "Select wc FROM WowClasses wc ";
         Query query = session.createQuery(hql);
+        List results = query.list();
+        return results;
+    }
+
+    @Override
+    public List<WowClasses> findAllSpecsByLocale(String locale) {
+        Session session = currentSession();
+        String hql = "Select wc FROM WowClasses wc JOIN FETCH wc.wowClassLoc wcl WHERE wcl.locale=:locale";
+        Query query = session.createQuery(hql);
+        query.setParameter("locale", locale);
         List results = query.list();
         return results;
     }
@@ -120,7 +135,8 @@ public class HibernateWowClassesRepository implements WowClassesRepository {
         String hql = "SELECT wc FROM WowClasses wc ORDER BY wc.wowClass ASC"; 
         Query query = session.createQuery(hql);
         List results = query.list();
-        List betterResults = new LinkedList();
+        return results;
+        /*List betterResults = new LinkedList();
         String cl = "";
         for (Object o : results) {
             WowClasses wc = (WowClasses) o;
@@ -129,6 +145,34 @@ public class HibernateWowClassesRepository implements WowClassesRepository {
                 cl = wc.getWowClass();
             }
         }
+        return betterResults;*/
+    }
+
+    @Override
+    public List<WowClasses> findAllClassesByLocale(String locale){
+        Session session = currentSession();
+        String hql = "SELECT wc FROM WowClasses wc JOIN FETCH wc.wowClassLoc wcl WHERE wcl.locale=:locale ORDER BY wcl.wowClassLocalized ASC";
+        Query query = session.createQuery(hql);
+        query.setParameter("locale", locale);
+        List results = query.list();
+
+        List betterResults = new LinkedList();
+        String cl = "";
+        for (Object o : results) {
+            WowClasses wc = (WowClasses) o;
+            for (WowClassesLocales wcl : wc.getWowClassLoc()){
+                System.out.println("WowClassesLocales: " + wcl.getWowClassLocalized()+" "+ wcl.getWowSpecLocalized());
+                if (!cl.equalsIgnoreCase(wcl.getWowClassLocalized())) {
+                    betterResults.add(o);
+                    cl =  wcl.getWowClassLocalized();
+            }}
+        }
+
+        /*for (Object o : betterResults){
+            WowClasses wc = (WowClasses)o;
+            logger.debug(wc.ge);
+        }*/
         return betterResults;
+
     }
 }

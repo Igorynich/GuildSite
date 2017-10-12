@@ -7,11 +7,23 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page contentType="text/html" pageEncoding="windows-1251" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
         TH {
             background: gold; /* Цвет фона */
@@ -49,46 +61,48 @@
             /*margin: 0 0 10px 10px;*/
         }
     </style>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+
     <title><s:message code="vsezayavki.title"/></title>
 </head>
 <body>
+<div class="container">
 <sec:authentication property="principal.username" var="loginId"/>
-<h1><s:message code="vsezayavki.hello"/></h1>
+<h1>${gstatic}</h1>
+<h2><s:message code="vsezayavki.hello"/></h2>
 <div class="mainform">
 
-    <s:url value="/vsezayavki?sortBy=name&dir=asc" var="sortByNameAsc" htmlEscape="true"/>
-        <s:url value="/vsezayavki?sortBy=name&dir=desc" var="sortByNameDesc" htmlEscape="true"/>
-    <table cellspacing="0">
-        <tr>
-            <th><s:url value="/vsezayavki?sortBy=date&dir=asc" var="sortByDateAsc" htmlEscape="true"/>
-                <s:url value="/vsezayavki?sortBy=date&dir=desc" var="sortByDateDesc" htmlEscape="true"/>
+    <s:url value="?sortBy=name&dir=asc" var="sortByNameAsc" htmlEscape="true"/>
+        <s:url value="?sortBy=name&dir=desc" var="sortByNameDesc" htmlEscape="true"/>
+    <table class="table table-hover" cellspacing="0">
+        <tr class="warning">
+            <th><s:url value="?sortBy=date&dir=asc" var="sortByDateAsc" htmlEscape="true"/>
+                <s:url value="?sortBy=date&dir=desc" var="sortByDateDesc" htmlEscape="true"/>
                 <table>
                     <tr>
                         <td><s:message code="vsezayavki.date"/></td>
-                        <td><a href="${sortByDateAsc}">/\</a></td>
+                        <td><a class="btn-link" href="${sortByDateAsc}">/\</a></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><a href="${sortByDateDesc}">\/</a></td>
+                        <td><a class="btn-link" href="${sortByDateDesc}">\/</a></td>
                     </tr>
                 </table></th>
-            <th><s:url value="/vsezayavki?sortBy=name&dir=asc" var="sortByNameAsc" htmlEscape="true"/>
-                <s:url value="/vsezayavki?sortBy=name&dir=desc" var="sortByNameDesc" htmlEscape="true"/>
+            <th><s:url value="?sortBy=name&dir=asc" var="sortByNameAsc" htmlEscape="true"/>
+                <s:url value="?sortBy=name&dir=desc" var="sortByNameDesc" htmlEscape="true"/>
                 <table>
                     <tr>
                         <td><s:message code="vsezayavki.nickname"/></td>
-                        <td><a href="${sortByNameAsc}">/\</a></td>
+                        <td><a class="btn-link" href="${sortByNameAsc}">/\</a></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><a href="${sortByNameDesc}">\/</a></td>
+                        <td><a class="btn-link" href="${sortByNameDesc}">\/</a></td>
                     </tr>
                 </table>
             </th>
 
-            <th><s:url value="/vsezayavki?sortBy=wowClass.wowClass&dir=asc" var="sortByClassAsc" htmlEscape="true"/>
-                <s:url value="/vsezayavki?sortBy=wowClass.wowClass&dir=desc" var="sortByClassDesc" htmlEscape="true"/>
+            <th><s:url value="?sortBy=wowClassLocalized&dir=asc" var="sortByClassAsc" htmlEscape="true"/>
+                <s:url value="?sortBy=wowClassLocalized&dir=desc" var="sortByClassDesc" htmlEscape="true"/>
                 <table>
                     <tr>
                         <td><s:message code="vsezayavki.class"/></td>
@@ -99,8 +113,8 @@
                         <td><a href="${sortByClassDesc}">\/</a></td>
                     </tr>
                 </table></th>
-            <th><s:url value="/vsezayavki?sortBy=wowClass.wowSpec&dir=asc" var="sortBySpecAsc" htmlEscape="true"/>
-                <s:url value="/vsezayavki?sortBy=wowClass.wowSpec&dir=desc" var="sortBySpecDesc" htmlEscape="true"/>
+            <th><s:url value="?sortBy=wowSpecLocalized&dir=asc" var="sortBySpecAsc" htmlEscape="true"/>
+                <s:url value="?sortBy=wowSpecLocalized&dir=desc" var="sortBySpecDesc" htmlEscape="true"/>
                 <table>
                     <tr>
                         <td><s:message code="vsezayavki.spec"/></td>
@@ -111,8 +125,8 @@
                         <td><a href="${sortBySpecDesc}">\/</a></td>
                     </tr>
                 </table></th>
-            <th><s:url value="/vsezayavki?sortBy=ilvl&dir=asc" var="sortByIlvlAsc" htmlEscape="true"/>
-                <s:url value="/vsezayavki?sortBy=ilvl&dir=desc" var="sortByIlvlDesc" htmlEscape="true"/>
+            <th><s:url value="?sortBy=ilvl&dir=asc" var="sortByIlvlAsc" htmlEscape="true"/>
+                <s:url value="?sortBy=ilvl&dir=desc" var="sortByIlvlDesc" htmlEscape="true"/>
                 <table>
                 <tr>
                     <td><s:message code="vsezayavki.ilvl"/></td>
@@ -123,8 +137,8 @@
                     <td><a href="${sortByIlvlDesc}">\/</a></td>
                 </tr>
             </table></th>
-            <th><s:url value="/vsezayavki?sortBy=exp&dir=asc" var="sortByExpAsc" htmlEscape="true"/>
-                <s:url value="/vsezayavki?sortBy=exp&dir=desc" var="sortByExpDesc" htmlEscape="true"/>
+            <th><s:url value="?sortBy=exp&dir=asc" var="sortByExpAsc" htmlEscape="true"/>
+                <s:url value="?sortBy=exp&dir=desc" var="sortByExpDesc" htmlEscape="true"/>
                 <table>
                     <tr>
                         <td><s:message code="vsezayavki.exp"/></td>
@@ -141,10 +155,10 @@
                 <s:param name="id" value="${zaya.id}"/>
             </s:url>
             <tr>
-                <td><a href="${link}">${zaya.date}</a></td>
+                <td><a href="${link}"><fmt:formatDate value="${zaya.date}" type="date" dateStyle="medium"/></a></td>
                 <td><a href="${link}">${zaya.name}</a></td>
-                <td><a href="${link}">${zaya.wowClass.wowClass}</a></td>
-                <td><a href="${link}">${zaya.wowClass.wowSpec}</a></td>
+                <td><a href="${link}">${zaya.wowClass.wowClassLoc[0].wowClassLocalized}</a></td>
+                <td><a href="${link}">${zaya.wowClass.wowClassLoc[0].wowSpecLocalized}</a></td>
                 <td class="ilvl"><a href="${link}">${zaya.ilvl}</a></td>
                 <td><a href="${link}">${zaya.exp}</a></td>
             </tr>
@@ -162,6 +176,6 @@
     </div>
 </div>
 
-
+</div>
 </body>
 </html>

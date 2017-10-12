@@ -27,8 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
 
-                antMatchers("/vsezayavki").access("hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER')").
-                antMatchers("/zayavka/**").access("(isAuthenticated() or isRememberMe()) and hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER')").
+                antMatchers("/vsezayavki/1").access("hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER')").
+                antMatchers("/vsezayavki/2").access("hasAnyRole('ROLE_ADMIN', 'ROLE_2NDSTATIC')").
+                antMatchers("/zayavka/**").access("(isAuthenticated() or isRememberMe()) and hasAnyRole('ROLE_ADMIN', 'ROLE_OFFICER', 'ROLE_2NDSTATIC')").
 
                 anyRequest().permitAll().
                 and().
