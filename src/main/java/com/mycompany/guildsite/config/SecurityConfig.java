@@ -1,6 +1,7 @@
 
 package com.mycompany.guildsite.config;
 
+import com.mycompany.guildsite.controller.HomeController;
 import com.mycompany.guildsite.data.GSUserService;
 import com.mycompany.guildsite.data.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.apache.log4j.Logger;
 
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,8 +22,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
+    private static final Logger logger = Logger.getLogger(SecurityConfig.class);
+
     @Autowired
     private UsersRepository ur;
+
+
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,17 +42,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 formLogin().  //login configuration
                 loginPage("/gslogin").
                 loginProcessingUrl("/gslogin").
+                successForwardUrl("/loginsuccess").
+                failureForwardUrl("/loginfailure").
                 usernameParameter("gsusername").
                 passwordParameter("gspassword").
-                defaultSuccessUrl("/").
+//                defaultSuccessUrl("/").
                 and().logout()    //logout configuration
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/logoutsuccess")
                 .and().exceptionHandling(). //exception handling configuration
                 /*.accessDeniedPage("/user/error").*/
                 and().
                 rememberMe().tokenValiditySeconds(2419200);
-                
+
     }
 
     @Override

@@ -37,7 +37,7 @@ public class HibernateZayavkaRepository implements ZayavkaRepository {
     public Zayavka save(Zayavka zayavka) {
         Serializable id = currentSession().save(zayavka);
         return new Zayavka((Long) id, zayavka.getName(), zayavka.getWowClass(), zayavka.getWhy(), zayavka.getWhat(), zayavka.getIlvl(),
-                zayavka.getDate(), false, zayavka.getExp(), zayavka.getGstatic());
+                zayavka.getExp(), zayavka.getGstatic());
     }
 
     @Override
@@ -143,6 +143,19 @@ public class HibernateZayavkaRepository implements ZayavkaRepository {
     }
 
     @Override
+    public List<Zayavka> findAllByLocaleAndGstaticIdAndChosen(String locale, long id) {
+        Session session = currentSession();
+        String hql = "SELECT z FROM Zayavka z JOIN FETCH z.wowClass wc JOIN FETCH wc.wowClassLoc wcl JOIN FETCH z.gstatic gs " +
+                "WHERE wcl.locale=:locale AND gs.id=:id AND z.chosen=true ORDER BY z.date";
+        Query query = session.createQuery(hql);
+        query.setParameter("locale", locale);
+        query.setParameter("id", id);
+        //logger.debug("QUERY:" + query.ge);
+        List results = query.list();
+        return results;
+    }
+
+    @Override
     public List<Zayavka> findAllSortedAndByLocaleAndByGstatisId(String sortBy, String dir, String locale, long id) {
         Session session = currentSession();
         String hql = "SELECT z FROM Zayavka z JOIN FETCH z.wowClass wc JOIN FETCH wc.wowClassLoc wcl JOIN FETCH z.gstatic gs " +
@@ -193,7 +206,18 @@ public class HibernateZayavkaRepository implements ZayavkaRepository {
         Zayavka zaya = (Zayavka) session.get(Zayavka.class, id);
         zaya.setRead(true);
         session.flush();
+        logger.debug("Zaya id=" + id+ "is now read");
         return zaya.isRead();
+    }
+
+    @Override
+    public boolean changeChosenStatusById(long id) {
+        Session session = currentSession();
+        Zayavka zaya = (Zayavka) session.get(Zayavka.class, id);
+        zaya.setChosen(!zaya.isChosen());
+        session.flush();
+        logger.debug("Changed chosen status to " + zaya.isChosen() + " in zaya with id=" + id);
+        return zaya.isChosen();
     }
 
     @Override
@@ -219,9 +243,16 @@ public class HibernateZayavkaRepository implements ZayavkaRepository {
         query.setParameter("id", id);
         //logger.debug(query.);
         Long l = (Long)query.uniqueResult();
+        return l.intValue();
+    }
 
-
-
+    @Override
+    public int countChosenByGstaticId(long id) {
+        String hql = "SELECT COUNT(z) FROM Zayavka z JOIN z.gstatic gs WHERE gs.id=:id and z.chosen=true";
+        Query query = currentSession().createQuery(hql);
+        query.setParameter("id", id);
+        //logger.debug(query.);
+        Long l = (Long)query.uniqueResult();
         return l.intValue();
     }
 }

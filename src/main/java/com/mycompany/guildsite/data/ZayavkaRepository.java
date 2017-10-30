@@ -24,11 +24,14 @@ public interface ZayavkaRepository {
     public List<Zayavka> findAll();
     public List<Zayavka> findAllByLocaleAndGstaticId(String locale, long id);
     public List<Zayavka> findAllByLocaleAndGstaticIdAndUnread(String locale, long id);
+    public List<Zayavka> findAllByLocaleAndGstaticIdAndChosen(String locale, long id);
     public List<Zayavka> findAllSortedAndByLocaleAndByGstatisId(String sortBy, String dir, String locale, long id);
     public List<Zayavka> findAllSortedAndByLocaleAndByGstatisIdAndUnread(String sortBy, String dir, String locale, long id);
     public List<Zayavka> findAllNotRead();
     public boolean setReadById(long id);
+    public boolean changeChosenStatusById(long id);
     public List<Zayavka> findAllByGstatic(String gstatic);
     public List<Zayavka> findAllByGstaticId(long id);
     public int countUnreadByGstaticId(long id);
+    public int countChosenByGstaticId(long id);
 }

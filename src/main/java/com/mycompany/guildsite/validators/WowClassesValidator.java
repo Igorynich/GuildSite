@@ -22,5 +22,6 @@ public class WowClassesValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, "shortName", "shortName.empty");
+        //ValidationUtils.rejectIfEmpty(errors, "wowClass", "shortName.empty");
     }
 }

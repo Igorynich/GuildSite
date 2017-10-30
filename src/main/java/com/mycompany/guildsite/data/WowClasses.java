@@ -33,6 +33,8 @@ public class WowClasses implements Serializable {
     private List<WowClassesLocales> wowClassLoc;
 
 
+
+
     public WowClasses() {
     }
 
@@ -59,5 +61,6 @@ public class WowClasses implements Serializable {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
 
 }

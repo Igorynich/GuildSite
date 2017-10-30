@@ -159,8 +159,28 @@ label::before {
     transition: .25s all ease;
 }
 
-tr.hand{
+tr{
     /*color: darkblue;*/
-
+    font-size: small;
     cursor: pointer;
+}
+tr.read {
+    background-color: #fef8d1;
+
+}
+tr.open{
+    background-color: #D1FFB1;
+}
+
+.tablo {
+
+}
+p.staticdesc{
+    margin-bottom: 20px;
+    margin-top: -10px;
+    border-color: #AD4837;
+    border-style: solid;
+    /*color: #AD4837;*/
+    font-weight: 500;
+    padding: 5px;
 }

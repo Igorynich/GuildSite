@@ -53,9 +53,13 @@ public class Zayavka implements Serializable {
     private Date date = new Date();
 
     @Column(name = "zread")
-    private boolean read;
+    private boolean read = false;
 
-//    @NotNull(message = "{exp.notnull}")
+    @Column(name = "zchosen")
+    private boolean chosen = false;
+
+
+    //    @NotNull(message = "{exp.notnull}")
     @Column(name = "exp")
     private String exp;
 
@@ -66,28 +70,37 @@ public class Zayavka implements Serializable {
     public Zayavka() {
     }
 
-    public Zayavka(Long id, String name, WowClasses cl, String why, String what, String ilvl, Date date, boolean read, String exp) {
+    public Zayavka(Long id, String name, WowClasses cl, String why, String what, String ilvl, String exp) {
         this.id = id;
         this.name = name;
         this.wowClass = cl;
         //this.wowSpec = sp;
         this.why = why;
         this.what = what;
+        this.ilvl = ilvl;
         this.exp = exp;
     }
 
-    public Zayavka(Long aLong, String name, WowClasses cl, String why, String what, String ilvl, Date date, boolean read, String exp, GuildStatic gstatic) {
+    public Zayavka(Long id, String name, WowClasses cl, String why, String what, String ilvl, String exp, GuildStatic gstatic) {
         this.id = id;
         this.name = name;
         this.wowClass = cl;
         //this.wowSpec = sp;
         this.why = why;
         this.what = what;
+        this.ilvl = ilvl;
         this.exp = exp;
         this.gstatic = gstatic;
     }
 
-    
+    public boolean isChosen() {
+        return chosen;
+    }
+
+    public void setChosen(boolean chosen) {
+        this.chosen = chosen;
+    }
+
     public String getIlvl() {
         return ilvl;
     }
